@@ -26,11 +26,26 @@
 
 (setq visible-bell t)
 
+;; Line numbering
+(column-number-mode)
+(global-display-line-numbers-mode t)
+;;disable line numbers for some modes
+(dolist (mode '(org-mode-hook
+		term-mode-hook
+		shell-mode-hook
+		eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
 ;; Font
 (set-face-attribute 'default nil :font "DejaVu Sans Mono" :height 100)
 
 ;; Theming
-(load-theme 'wombat t)
+(use-package doom-themes)
+(load-theme 'doom-palenight t)
+
+;; Rainbow delimiters
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; Diminish
 (use-package diminish) ; Tell packages I don't care about their minor mode
@@ -54,6 +69,19 @@
   :config
   (ivy-mode 1))
 
+(use-package counsel
+  :bind (("M-x" . counsel-M-x)
+	 ("C-x b" . counsel-ibuffer)
+	 ("C-x C-f" . counsel-find-file)
+	 :map minibuffer-local-map
+	 ("C-r" . 'counsel-minibuffer-history))
+  :config
+  (setq ivy-initial-inputs-alist nil))
+
+(use-package ivy-rich
+  :init
+  (ivy-rich-mode 1))
+
 ;; all-the-icons
 (use-package all-the-icons)
 
@@ -65,3 +93,22 @@
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+;; Which-key
+(use-package which-key
+  :init (which-key-mode)
+  :diminish which-key-mode
+  :config
+  (setq which-key-idle-delay 0.3))
+
+;; Helpful
+(use-package helpful
+  :custom
+  (counsel-describe-function-function #'helpful-callable)
+  (counsel-describe-variable-function #'helpful-variable)
+  :bind
+  ([remap describe-function] . counsel-describe-function)
+  ([remap describe-command] . helpful-command)
+  ([remap describe-variable] . counsel-describe-variable)
+  ([remap describe-key] . helpful-key))
+
