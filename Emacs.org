@@ -71,6 +71,14 @@ Use escape as C=g
       :custom ((doom-modeline-height 15)))
 #+end_src
 
+* Dashboard
+#+begin_src emacs-lisp
+  (use-package dashboard
+    :ensure t
+    :config
+    (dashboard-setup-startup-hook))
+#+end_src
+
 * Ivy and Counsel
 
   #+begin_src emacs-lisp
