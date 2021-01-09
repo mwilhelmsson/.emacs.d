@@ -2,7 +2,7 @@
 
   Lets turn off some ui-parts that gets in the way
 #+begin_src emacs-lisp
-  (setq inhibit-startup-message t) 
+  (setq inhibit-startup-message nil) 
 
   (menu-bar-mode -1)
   (scroll-bar-mode -1)
@@ -16,7 +16,7 @@ Lets have a visible bell instead of a beep
   (setq visible-bell t)
 #+end_src
 
-Use escape as C=g
+Use escape as C-g
 #+begin_src emacs-lisp
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 #+end_src
@@ -71,13 +71,6 @@ Use escape as C=g
       :custom ((doom-modeline-height 15)))
 #+end_src
 
-* Dashboard
-#+begin_src emacs-lisp
-  (use-package dashboard
-    :ensure t
-    :config
-    (dashboard-setup-startup-hook))
-#+end_src
 
 * Ivy and Counsel
 
@@ -286,7 +279,7 @@ Use escape as C=g
 #+end_src
 
 * EXWM
-Stolen EXWM-config
+
 #+begin_src emacs-lisp
     (defvar 0x4d/frame-transparency '(90 . 90))
     (set-frame-parameter (selected-frame) 'alpha 0x4d/frame-transparency)
@@ -367,4 +360,36 @@ Stolen EXWM-config
                         (number-sequence 0 9))))
 
       (exwm-enable))
+#+end_src
+
+* Dashboard
+#+begin_src emacs-lisp
+  (use-package dashboard
+    :ensure t
+    :config
+    (dashboard-setup-startup-hook))
+#+end_src
+
+* mu4e
+
+#+begin_src emacs-lisp
+    (use-package mu4e
+      :ensure nil
+      :load-path "~/.guix-profile/share/emacs/site-lisp"
+      :config
+      (setq mu4e-change-filenames-when-moving t)
+      (setq mu4e-update-interval (* 10 60))
+      (setq mu4e-get-mail-command "mbsync -a")
+      (setq mu4e-maildir "~/Mail")
+      (setq mu4e-drafts-folder "/[Gmail].Drafts")
+      (setq mu4e-sent-folder "/[Gmail].Sent Mail")
+      (setq mu4e-refile-folder "/[Gmail].All Mail")
+      (setq mu4e-trash-folder "/[Gmail].Trash")
+      (setq mu4e-maildir-shortcuts
+            '(("/Inbox"             . ?i)
+              ("/[Gmail].Sent Mail" . ?s)
+              ("/[Gmail].Trash"     . ?t)
+              ("/[Gmail].Drafts"    . ?d)
+              ("/[Gmail].All Mail"  . ?a)))
+      (setq user-mail-address "micke@axevalla.fhsk.se"))
 #+end_src
