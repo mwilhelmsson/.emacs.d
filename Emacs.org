@@ -390,10 +390,10 @@ Use escape as C-g
     (setq mu4e-trash-folder "/[Gmail]/Trash")
     (setq mu4e-maildir-shortcuts
           '(("/Inbox"             . ?i)
-            ("/[Gmail].Sent Mail" . ?s)
-            ("/[Gmail].Trash"     . ?t)
-            ("/[Gmail].Drafts"    . ?d)
-            ("/[Gmail].All Mail"  . ?a)))
+            ("/[Gmail]/Sent Mail" . ?s)
+            ("/[Gmail]/Trash"     . ?t)
+            ("/[Gmail]/Drafts"    . ?d)
+            ("/[Gmail]/All Mail"  . ?a)))
     (setq user-mail-address "micke@axevalla.fhsk.se")
     (mu4e t))
 #+end_src
