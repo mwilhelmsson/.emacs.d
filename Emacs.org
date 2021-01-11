@@ -397,3 +397,8 @@ Use escape as C-g
     (setq user-mail-address "micke@axevalla.fhsk.se")
     (mu4e t))
 #+end_src
+
+* PDF
+#+begin_src emacs-lisp
+  (use-package pdf-tools)
+#+end_src
